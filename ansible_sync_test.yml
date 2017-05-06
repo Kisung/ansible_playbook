@@ -1,0 +1,16 @@
+---
+  - hosts: localhost
+
+    tasks:
+      - name: set_fact
+        set_fact: mounts2={{ ansible_mounts | map(attribute='mount') | list }}
+
+      - name: chk var
+        debug:
+          var: mounts2
+
+      - name: "DEBUG3: using with_items loop"
+        debug:
+          msg: "item.item"
+        with_items:
+          - '{{ mounts2 }}'
