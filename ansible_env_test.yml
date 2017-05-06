@@ -1,0 +1,13 @@
+---
+- hosts: all
+
+  tasks:
+    - name: Gathering facts
+      setup:
+        gather_subset: hardware
+        filter: ansible_mounts
+      register: mymotd
+
+    - name: local device mount
+      debug:
+        var: mymotd.ansible_facts.ansible_mounts
